@@ -1,0 +1,26 @@
+version: "2"
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:ro
+
+  server:
+    build: ./server
+    links:
+      - db
+
+  admin:
+    build: ./admin
+    links:
+      - server
+    
+  client:
+    build: ./client
+    links:
+      - server
+    
+
