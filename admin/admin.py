@@ -14,7 +14,7 @@ def delete_book(book_id):
 
 
 def list_books():
-    response = requests.post(
+    response = requests.get(
         url)
     return response.text
 

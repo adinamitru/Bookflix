@@ -4,53 +4,50 @@ services:
     image: mysql:8.0
     ports:
       - '3306:3306'
-    networks:
-      - network-db
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./db:/docker-entrypoint-initdb.d/:ro
 
   server:
-    image: adapter:latest
+    image: adinamitru/bookflix:latest
+    tty: true
     ports:
       - "5000:5000"
     environment:
       - HOST=db
       - PORT=5000
-    networks:
-      - network-db
-      - network-admin
-      - network-client
     depends_on:
       - db
     build: ./server
 
   admin:
-    image: adapter:latest
+    image: adinamitru/bookflix:admin
+    tty: true
     build: ./admin
     depends_on:
       - server
 
-#  server:
-#    build: ./server
-#    links:
-#      - db
-#
-#  admin:
-#    build: ./admin
-#    links:
-#      - server
-#
-#  client:
-#    build: ./client
-#    links:
-#      - server
-    
+  client:
+    image: adinamitru/bookflix:client
+    tty: true
+    build: ./client
+    stdin_open: true
+    depends_on:
+      - server
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - '80:3000'
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./grafana-provisioning/:/etc/grafana/provisioning
+    depends_on:
+      - db
+
+
 volumes:
   influxdb-storage:
   grafana-storage:
-networks:
-  network-db:
-  network-admin:
-  network-client:
+

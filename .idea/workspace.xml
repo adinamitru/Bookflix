@@ -3,7 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="70360495-fd87-42e1-b5d2-1f6b5550f1ad" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/db/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/admin/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/init.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +23,6 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -30,11 +34,11 @@
     <configuration name="admin/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
+          <option name="imageTag" value="" />
           <option name="buildCliOptions" value="" />
           <option name="command" value="" />
           <option name="containerName" value="" />
           <option name="entrypoint" value="" />
-          <option name="imageTag" value="" />
           <option name="commandLineOptions" value="" />
           <option name="sourceFilePath" value="admin/Dockerfile" />
         </settings>
@@ -44,11 +48,11 @@
     <configuration name="client/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
+          <option name="imageTag" value="" />
           <option name="buildCliOptions" value="" />
           <option name="command" value="" />
           <option name="containerName" value="" />
           <option name="entrypoint" value="" />
-          <option name="imageTag" value="" />
           <option name="commandLineOptions" value="" />
           <option name="sourceFilePath" value="client/Dockerfile" />
         </settings>
@@ -58,11 +62,11 @@
     <configuration name="db/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
+          <option name="imageTag" value="" />
           <option name="buildCliOptions" value="" />
           <option name="command" value="" />
           <option name="containerName" value="" />
           <option name="entrypoint" value="" />
-          <option name="imageTag" value="" />
           <option name="commandLineOptions" value="" />
           <option name="sourceFilePath" value="db/Dockerfile" />
         </settings>
@@ -72,38 +76,17 @@
     <configuration name="server/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
+          <option name="imageTag" value="" />
           <option name="buildCliOptions" value="" />
           <option name="command" value="" />
           <option name="containerName" value="" />
           <option name="entrypoint" value="" />
-          <option name="imageTag" value="" />
           <option name="commandLineOptions" value="" />
           <option name="sourceFilePath" value="server/Dockerfile" />
         </settings>
       </deployment>
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Docker.admin/Dockerfile" />
-        <item itemvalue="Docker.admin/Dockerfile" />
-        <item itemvalue="Docker.server/Dockerfile" />
-        <item itemvalue="Docker.client/Dockerfile" />
-        <item itemvalue="Docker.db/Dockerfile" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -130,13 +113,28 @@
       <option name="project" value="LOCAL" />
       <updated>1585776022747</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Changed Dockerfile">
+      <created>1585777214080</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1585777214080</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Changed Dockerfile">
+      <created>1585777225854</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1585777225854</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Changed yml" />
     <MESSAGE value="Added Dockerfile" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Dockerfile" />
+    <MESSAGE value="Changed Dockerfile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed Dockerfile" />
   </component>
   <component name="WindowStateProjectService">
     <state x="199" y="112" width="642" height="883" key="#admin/Dockerfile" timestamp="1585775973402">
@@ -155,14 +153,14 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="199" y="112" width="642" height="883" key="#server/Dockerfile/67.27.1853.1053@67.27.1853.1053" timestamp="1585775965267" />
-    <state x="137" y="129" width="777" height="847" key="CommitChangelistDialog2" timestamp="1585777213950">
+    <state x="137" y="129" width="777" height="847" key="CommitChangelistDialog2" timestamp="1585777225734">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="137" y="129" width="777" height="847" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1585777213950" />
-    <state x="125" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1585776025509">
+    <state x="137" y="129" width="777" height="847" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1585777225734" />
+    <state x="125" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1585777227612">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="125" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2/67.27.1853.1053@67.27.1853.1053" timestamp="1585776025509" />
+    <state x="125" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2/67.27.1853.1053@67.27.1853.1053" timestamp="1585777227612" />
     <state x="186" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1585775910457">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>

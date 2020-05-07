@@ -20,8 +20,8 @@ def add_book():
                                        database='bookflix',
                                        user='root',
                                        password='root')
+        print("DA")
 
-        # details give by the admin for the flight
         title = request.values.get('title')
         author_name = request.values.get('author_name')
         publisher = request.values.get('publisher')
@@ -34,7 +34,7 @@ def add_book():
         rate = request.values.get('rate')
         awards = request.values.get('awards')
 
-        mySql_insert_query = """INSERT INTO flights (title, author_name, publisher, language, genre,
+        mySql_insert_query = """INSERT INTO book (title, author_name, publisher, language, genre,
          short_description, publishing_year, no_pages, no_readers, rate, awards)
                                   VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s) """
         recordTuple = (title, author_name, publisher, language, genre, short_description, publishing_year,
@@ -64,10 +64,17 @@ def delete_book():
                                        password='root')
 
         book_id = request.values.get('book_id')
-        sql_Delete_query = "Delete from book where book_id = %s"
+        sql_select_booking_query = "Select * from book where book_id = %s"
         cursor = conn.cursor()
-        cursor.execute(sql_Delete_query, (book_id,))
-        conn.commit()
+        cursor.execute(sql_select_booking_query, (book_id,))
+        exits = cursor.fetchone()
+        if exits != "":
+            sql_Delete_query = "Delete from book where book_id = %s"
+            cursor = conn.cursor()
+            cursor.execute(sql_Delete_query, (book_id,))
+            conn.commit()
+
+
 
     except Error as e:
         print(e)
@@ -78,7 +85,7 @@ def delete_book():
         return ""
 
 
-@app.route('/book', methods=['POST'])
+@app.route('/book', methods=['GET'])
 def list_books():
     """ Connect to MySQL database """
     conn = None
@@ -89,13 +96,13 @@ def list_books():
                                        user='root',
                                        password='root')
 
-        sql_list_query = "Select from * book"
+        print("DA")
+        sql_list_query = "Select * from book"
         cursor = conn.cursor()
         cursor.execute(sql_list_query)
-        conn.commit()
-        record = cursor.fetchone()
-        recordTuple = (record[0], record[1], record[2], record[3], record[4], record[5],
-                     record[6], record[7], record[8], record[9], record[10])
+        record = cursor.fetchall()
+        print("DA")
+        print(record)
 
     except Error as e:
         print(e)
@@ -103,7 +110,162 @@ def list_books():
     finally:
         if conn is not None and conn.is_connected():
             conn.close()
-    return json.dumps(recordTuple)
+    return json.dumps(record)
+
+
+@app.route('/user', methods=['POST'])
+def list_category():
+    """ Connect to MySQL database """
+    category_no = 0
+    conn = None
+    try:
+        conn = mysql.connector.connect(host='db',
+                                       port='3306',
+                                       database='bookflix',
+                                       user='root',
+                                       password='root')
+
+        category = request.values.get('category')
+        cursor = conn.cursor()
+        if category == "read":
+            category_no = 1
+        elif category == "started":
+            category_no = 2
+        elif category == "liked":
+            category_no = 3
+        elif category == "disliked":
+            category_no = 4
+
+        print(category_no)
+        sql_list_query = "Select title, author_name from user_client natural join book where list_id = %s"
+        cursor.execute(sql_list_query, (category_no,))
+        record = cursor.fetchall()
+
+    except Error as e:
+        print(e)
+
+    finally:
+        if conn is not None and conn.is_connected():
+            conn.close()
+    return json.dumps(record)
+
+
+@app.route('/books', methods=['POST'])
+def get_book():
+    """ Connect to MySQL database """
+    conn = None
+    try:
+        conn = mysql.connector.connect(host='db',
+                                       port='3306',
+                                       database='bookflix',
+                                       user='root',
+                                       password='root')
+
+        category = request.values.get('category')
+        category_type = request.values.get('category_type')
+        sql_select_booking_query = """Select * from book where genre = %s"""
+        cursor = conn.cursor()
+        cursor.execute(sql_select_booking_query, (category_type,))
+        record = cursor.fetchall()
+        conn.commit()
+
+    except Error as e:
+        print(e)
+
+    finally:
+        if conn is not None and conn.is_connected():
+            conn.close()
+    return json.dumps(record)
+
+
+@app.route('/read', methods=['POST'])
+def read_book():
+    """ Connect to MySQL database """
+    conn = None
+    try:
+        conn = mysql.connector.connect(host='db',
+                                       port='3306',
+                                       database='bookflix',
+                                       user='root',
+                                       password='root')
+
+        read_book_name = request.values.get('read_book_name')
+        liked = request.values.get('liked')
+        sql_select_booking_query = """Select * from book where title = %s"""
+        cursor = conn.cursor()
+        cursor.execute(sql_select_booking_query, (read_book_name,))
+        record = cursor.fetchone()
+        book_id = record[0]
+        conn.commit()
+
+        mySql_insert_read_query = """INSERT INTO user_client (book_id, list_id)
+                                  VALUES (%s, 1) """
+        cursor = conn.cursor()
+        cursor.execute(mySql_insert_read_query, (book_id,))
+        conn.commit()
+
+        if liked == 'like':
+            mySql_insert_liked_query = """INSERT INTO user_client (book_id, list_id)
+                                      VALUES (%s, 3) """
+            cursor = conn.cursor()
+            cursor.execute(mySql_insert_liked_query, (book_id,))
+            conn.commit()
+        elif liked == 'dislike':
+            mySql_insert_liked_query = """INSERT INTO user_client (book_id, list_id)
+                                      VALUES (%s, 4) """
+            cursor = conn.cursor()
+            cursor.execute(mySql_insert_liked_query, (book_id,))
+            conn.commit()
+
+    except Error as e:
+        print(e)
+
+    finally:
+        if conn is not None and conn.is_connected():
+            conn.close()
+    return ""
+
+
+@app.route('/start', methods=['POST'])
+def start_book():
+    """ Connect to MySQL database """
+    conn = None
+    try:
+        conn = mysql.connector.connect(host='db',
+                                       port='3306',
+                                       database='bookflix',
+                                       user='root',
+                                       password='root')
+
+        stat_book_name = request.values.get('stat_book_name')
+        sql_select_booking_query = """Select * from book where title = %s"""
+        cursor = conn.cursor()
+        cursor.execute(sql_select_booking_query, (stat_book_name,))
+        record = cursor.fetchone()
+        book_id = record[0]
+        genre = record[5]
+        print(genre)
+        conn.commit()
+
+        mySql_insert_started_query = """INSERT INTO user_client (book_id, list_id)
+                                          VALUES (%s, 2) """
+        cursor = conn.cursor()
+        cursor.execute(mySql_insert_started_query, (book_id,))
+        conn.commit()
+
+        sql_select_suggest_query = """Select * from book where genre = %s and not(book_id=%s)"""
+        cursor = conn.cursor()
+        cursor.execute(sql_select_suggest_query, (genre, book_id,))
+        record_suggest = cursor.fetchall()
+        conn.commit()
+
+    except Error as e:
+        print(e)
+
+    finally:
+        if conn is not None and conn.is_connected():
+            conn.close()
+    return json.dumps(record_suggest)
 
 
 if __name__ == '__main__':
