@@ -11,15 +11,7 @@ url_read = 'http://server:5000/read'
 url_category = 'http://server:5000/user'
 url_start = 'http://server:5000/start'
 url_login = 'http://server:5000/login'
-
-
-def login(user_name, password):
-    response = requests.post(
-        url_login,
-        data={
-            'user_name': user_name,
-            'password': password})
-    return response.text
+url_createAcc = 'http://server:5000/createAcc'
 
 
 def list_books():
@@ -62,51 +54,86 @@ def start_book(stat_book_name):
     return response.text
 
 
+def login(user_name, password):
+    response = requests.post(
+        url_login,
+        data={
+            'user_name': user_name,
+            'password': password})
+    return response.text
+
+
+def create_account(name, user_name, password):
+    response = requests.post(
+        url_createAcc,
+        data={'name': name,
+              'user_name': user_name,
+              'password': password})
+
+
+def read_create_account_details():
+    name = input("Name: ")
+    user_name = input("User_name: ")
+    password = (input("Password: "))
+    recordTuple = (name, user_name, password)
+
+    return recordTuple
+
+
 def operation_type():
     while True:
         print("Choose operation ('Create account' or 'Login'): ")
         line = sys.stdin.readline()
-        # if line == "Create account\n":
-        #     recordTuple = read_add_details()
-        #     create_account(recordTuple[0], recordTuple[1], recordTuple[2])
-        #     print("User added successfully!")
+        ok = 5
+        if line == "Create account\n":
+            recordTuple = read_create_account_details()
+            create_account(recordTuple[0], recordTuple[1], recordTuple[2])
+            print("User added successfully!\n" + "Do you want you login?")
+            yes_no = input("Y/N :  ")
+            if yes_no == "Y":
+                ok = 0
         if line == "Login\n":
             user_name = input("user_name:  ")
             password = input("password:  ")
-            ok = json.loads(login(user_name, password))
-            if ok == '0':
-                print("Choose operation ('Recommend a book = 1', 'Mark a book as read = 2', 'Start a new book = 3', "
-                      "'Continue reading = 4', 'List books = 5', 'List category ""= 6'): ")
-                line = sys.stdin.readline()
-                if line == "1\n":
-                    category = input("Please provide the category:  ")
-                    category_type = input("Please provide the  " + category + " you would like: ")
-                    recommendations = json.loads(get_book(category, category_type))
-                    print("The recommendations: ", recommendations)
-                if line == "2\n":
-                    read_book_name = input("Please provide the name of the book:  ")
-                    liked = input("Please say if you like or dislike: ")
-                    read_book(read_book_name, liked)
-                    print("The book " + liked + " has been marked as read and " + liked)
-                if line == "3\n":
-                    stat_book_name = input("Please provide the name of the book:  ")
-                    suggestion = start_book(stat_book_name)
-                    print("The book has been added to started list and you might also like: " + suggestion)
-                if line == "4\n":
-                    list = json.loads(list_category("started"))
-                    print(list)
-                    read_book_name = input("Which one would you like to continue reading: ")
-                if line == "5\n":
-                    list = json.loads(list_books())
-                    print(list)
-                if line == "6\n":
-                    category = input("Please provide the category: ")
-                    list = json.loads(list_category(category))
-                    print(list)
-            elif ok == '1':
-                print("Wrong password or username, plase try again ")
-            elif ok == '2':
-                print("You do not have account, please create account ")
+            record = json.loads(login(user_name, password))
+            print(record)
+            if record != "":
+                ok = 0
+            else:
+                ok = 1
+        if ok == 0:
+            print("Choose operation ('Recommend a book = 1', 'Mark a book as read = 2', 'Start a new book = 3', "
+                  "'Continue reading = 4', 'List books = 5', 'List category ""= 6'): ")
+            line = sys.stdin.readline()
+            if line == "1\n":
+                category = input("Please provide the category:  ")
+                category_type = input("Please provide the  " + category + " you would like: ")
+                recommendations = json.loads(get_book(category, category_type))
+                print("The recommendations: ", recommendations)
+            if line == "2\n":
+                read_book_name = input("Please provide the name of the book:  ")
+                liked = input("Please say if you like or dislike: ")
+                read_book(read_book_name, liked)
+                print("The book " + liked + " has been marked as read and " + liked)
+            if line == "3\n":
+                stat_book_name = input("Please provide the name of the book:  ")
+                suggestion = start_book(stat_book_name)
+                print("The book has been added to started list and you might also like: " + suggestion)
+            if line == "4\n":
+                list = json.loads(list_category("started"))
+                print(list)
+                read_book_name = input("Which one would you like to continue reading: ")
+            if line == "5\n":
+                list = json.loads(list_books())
+                print(list)
+            if line == "6\n":
+                category = input("Please provide the category: ")
+                list = json.loads(list_category(category))
+                print(list)
+        elif ok == 1:
+            print("Wrong password or username, please try again ")
+        elif ok == 2:
+            print("You do not have account, please create account ")
 
 
 if __name__ == '__main__':

@@ -53,5 +53,6 @@ VALUES ('c', 'Irving Stone', 'Allen & Unwin', 'English', 'biographical novel', '
 INSERT INTO book (title, author_name, publisher, language, genre, short_description, publishing_year, no_pages, no_readers, rate, awards)
 VALUES ('Harry Potter and the Goblet of Fire', 'J. K. Rowling', 'Scholastic', 'English', 'fantasy', 'It follows Harry Potter, a wizard in his fourth year at Hogwarts School of Witchcraft and Wizardry, and the mystery surrounding the entry of Harrys name into the Triwizard Tournament, in which he is forced to compete.', 2000, 636, 562, 8.9, 2);
 
-INSERT INTO user_info VALUES ('Ana Popescu', 'ana', 'pass');
+INSERT INTO user_info (name, user_name, password) VALUES ('Ana Popescu', 'ana', 'pass');
+INSERT INTO user_info (name, user_name, password) VALUES (Adina, adina, pass);
 

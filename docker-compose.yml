@@ -8,6 +8,9 @@ services:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./db:/docker-entrypoint-initdb.d/:ro
+    deploy:
+      placement:
+        constraints: [node.role == manager]
 
   server:
     image: adinamitru/bookflix:latest
@@ -30,7 +33,7 @@ services:
       - server
 
   auth:
-    image: auth:latest
+    image: adinamitru/bookflix:auth
     tty: true
     ports:
       - "6000:6000"
@@ -49,7 +52,7 @@ services:
     depends_on:
       - server
 
-  grafana:
+grafana:
     image: grafana/grafana:latest
     ports:
       - '3000:3000'
@@ -60,5 +63,17 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=bookflix
       - GF_SECURITY_ADMIN_PASSWORD=bookflix
+
+
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - 8081:8080
+    stop_grace_period: 1m30s
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [ node.role == manager ]
 
 
