@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="70360495-fd87-42e1-b5d2-1f6b5550f1ad" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/grafana-provisioning/dashboards/books.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/grafana-provisioning/dashboards/dashboard.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/grafana-provisioning/datasources/datasource.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/auth.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth/requirements.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cc_MitruAdina_OpreaDenisa_e-Gov.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/client.py" beforeDir="false" afterPath="$PROJECT_DIR$/client/client.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db/init.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/server/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/server.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +35,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/auth" />
+    </key>
   </component>
   <component name="RunManager" selected="Docker.admin/Dockerfile">
     <configuration name="admin/Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
@@ -89,6 +99,7 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -137,39 +148,5 @@
     <MESSAGE value="Added Dockerfile" />
     <MESSAGE value="Changed Dockerfile" />
     <option name="LAST_COMMIT_MESSAGE" value="Changed Dockerfile" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="199" y="112" width="642" height="883" key="#admin/Dockerfile" timestamp="1585775973402">
-      <screen x="67" y="27" width="1853" height="1053" />
-    </state>
-    <state x="199" y="112" width="642" height="883" key="#admin/Dockerfile/67.27.1853.1053@67.27.1853.1053" timestamp="1585775973402" />
-    <state x="199" y="112" width="642" height="883" key="#client/Dockerfile" timestamp="1585775960480">
-      <screen x="67" y="27" width="1853" height="1053" />
-    </state>
-    <state x="199" y="112" width="642" height="883" key="#client/Dockerfile/67.27.1853.1053@67.27.1853.1053" timestamp="1585775960480" />
-    <state x="199" y="100" width="642" height="907" key="#db/Dockerfile" timestamp="1585775950065">
-      <screen x="67" y="27" width="1853" height="1053" />
-    </state>
-    <state x="199" y="100" width="642" height="907" key="#db/Dockerfile/67.27.1853.1053@67.27.1853.1053" timestamp="1585775950065" />
-    <state x="199" y="112" width="642" height="883" key="#server/Dockerfile" timestamp="1585775965267">
-      <screen x="67" y="27" width="1853" height="1053" />
-    </state>
-    <state x="199" y="112" width="642" height="883" key="#server/Dockerfile/67.27.1853.1053@67.27.1853.1053" timestamp="1585775965267" />
-    <state x="137" y="129" width="777" height="847" key="CommitChangelistDialog2" timestamp="1585777225734">
-      <screen x="67" y="27" width="1853" height="1053" />
-    </state>
-    <state x="137" y="129" width="777" height="847" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1585777225734" />
-    <state x="125" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1585777227612">
-      <screen x="67" y="27" width="1853" height="1053" />
-    </state>
-    <state x="125" y="288" width="800" height="528" key="Vcs.Push.Dialog.v2/67.27.1853.1053@67.27.1853.1053" timestamp="1585777227612" />
-    <state x="186" y="381" key="com.intellij.ide.util.TipDialog" timestamp="1585775910457">
-      <screen x="67" y="27" width="1853" height="1053" />
-    </state>
-    <state x="186" y="381" key="com.intellij.ide.util.TipDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1585775910457" />
-    <state x="293" y="473" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585775997101">
-      <screen x="67" y="27" width="1853" height="1053" />
-    </state>
-    <state x="293" y="473" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.1053@67.27.1853.1053" timestamp="1585775997101" />
   </component>
 </project>

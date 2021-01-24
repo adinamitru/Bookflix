@@ -1,13 +1,14 @@
-# Mitru Adina
-# 343C1
-
 import json
 
 import mysql.connector
+import requests
 from mysql.connector import Error, cursor
 from flask import Flask, escape, request
+from werkzeug.utils import redirect
 
 app = Flask(__name__)
+
+url_login = 'http://auth:6000/login'
 
 
 @app.route('/book', methods=['POST'])
@@ -50,6 +51,111 @@ def add_book():
         if conn is not None and conn.is_connected():
             conn.close()
         return ""
+
+
+@app.route('/createAcc', methods=['POST'])
+def add_user():
+    """ Connect to MySQL database """
+    conn = None
+    try:
+        conn = mysql.connector.connect(host='db',
+                                       port='3306',
+                                       database='bookflix',
+                                       user='root',
+                                       password='root')
+        print("DA")
+
+        name = request.values.get('name')
+        user_name = request.values.get('user_name')
+        password = request.values.get('password')
+
+        mySql_insert_query = """INSERT INTO user_info (name, user_name, password)
+                                  VALUES (%s, %s, %s) """
+        recordTuple = (name, user_name, password)
+        cursor = conn.cursor()
+        cursor.execute(mySql_insert_query, recordTuple)
+        conn.commit()
+
+    except Error as e:
+        print(e)
+
+    finally:
+        if conn is not None and conn.is_connected():
+            conn.close()
+        return ""
+
+
+# @app.route('/createAcc', methods=['GET'])
+# def list_users():
+#     """ Connect to MySQL database """
+#     conn = None
+#     try:
+#         conn = mysql.connector.connect(host='db',
+#                                        port='3306',
+#                                        database='bookflix',
+#                                        user='root',
+#                                        password='root')
+#
+#         print("DA")
+#         sql_list_query = "Select * from user_info"
+#         cursor = conn.cursor()
+#         cursor.execute(sql_list_query)
+#         record = cursor.fetchall()
+#         print("DA")
+#         print(record)
+#
+#     except Error as e:
+#         print(e)
+#
+#     finally:
+#         if conn is not None and conn.is_connected():
+#             conn.close()
+#         return json.dumps(record)
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    user_name = request.values.get('user_name')
+    password = request.values.get('password')
+    print('Sunt in server in login')
+    response = requests.post(
+        url_login,
+        data={
+            'user_name': user_name,
+            'password': password})
+    print(response.json())
+    return json.dumps(response.text)
+    # """ Connect to MySQL database """
+    # conn = None
+    # try:
+    #     conn = mysql.connector.connect(host='db',
+    #                                    port='3306',
+    #                                    database='bookflix',
+    #                                    user='root',
+    #                                    password='root')
+    #
+    #     print("DA")
+    #     user_name = request.values.get('user_name')
+    #     password = request.values.get('password')
+    #     sql_list_query = "Select * from user_info WHERE user_name = %s AND password = %s"
+    #     cursor = conn.cursor()
+    #     cursor.execute(sql_list_query, (user_name, password,))
+    #     exits = cursor.fetchone()
+    #     print("Inainte")
+    #     if exits != "":
+    #         print("Login merge")
+    #         # @app.route('/hello')
+    #         # def hello():
+    #         # return requests.get('http://www.google.com').text
+    # except Error as e:
+    #
+    #     print(e)
+    # finally:
+    #
+    #     if conn is not None and conn.is_connected():
+    #         conn.close()
+    #
+    #     return ""
 
 
 @app.route('/book', methods=['DELETE'])

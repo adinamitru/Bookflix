@@ -19,6 +19,7 @@ services:
       - PORT=5000
     depends_on:
       - db
+      - auth
     build: ./server
 
   admin:
@@ -27,6 +28,18 @@ services:
     build: ./admin
     depends_on:
       - server
+
+  auth:
+    image: auth:latest
+    tty: true
+    ports:
+      - "6000:6000"
+    environment:
+      - HOST=db
+      - PORT=6000
+    build: ./auth
+    depends_on:
+      - db
 
   client:
     image: adinamitru/bookflix:client
